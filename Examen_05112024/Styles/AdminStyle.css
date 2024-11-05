@@ -1,0 +1,26 @@
+﻿.parent {
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr; /* Define el tamaño de las filas */
+    grid-template-columns: 1fr 3fr 1fr; /* Define el tamaño de las columnas */
+    height: 100vh; /* Ajusta la altura al 100% del viewport */
+    border: 2px solid black; /* Bordes externos */
+}
+
+.div1 {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.div3 {
+    grid-column: span 2;
+    grid-row: span 3;
+    grid-column-start: 1;
+    grid-row-start: 3;
+}
+
+.div4 {
+    grid-column: span 3;
+    grid-row: span 5;
+    grid-column-start: 3;
+    grid-row-start: 1;
+}
