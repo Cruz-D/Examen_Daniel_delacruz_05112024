@@ -9,52 +9,7 @@
     <link href="Bootstrap/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="Styles/AdminStyle.css" rel="stylesheet" />
     <style>
-        /* Estilos de CSS Grid para crear una cuadrícula responsiva */
-        .parent {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 1rem;
-            padding: 1rem;
-        }
-
-        .div1, .div3, .div4 {
-            background-color: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 1rem;
-        }
-
-        /* Estilos para pantallas grandes */
-        @media (min-width: 992px) {
-            .parent {
-                grid-template-columns: 1fr 2fr;
-                grid-template-rows: auto;
-            }
-            .div1 {
-                grid-column: 1 / 2;
-                grid-row: 1;
-            }
-            .div3 {
-                grid-column: 1 / 2;
-                grid-row: 2;
-            }
-            .div4 {
-                grid-column: 2 / 3;
-                grid-row: span 2;
-            }
-        }
-
-        /* Estilos para pantallas medianas */
-        @media (max-width: 991px) {
-            .parent {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
-            }
-            .div1, .div3, .div4 {
-                grid-column: span 1;
-                grid-row: auto;
-            }
-        }
+       
     </style>
 </head>
 <body>

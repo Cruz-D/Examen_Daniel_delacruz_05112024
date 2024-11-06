@@ -21,13 +21,17 @@ namespace Examen_05112024
             else
             {
                 UsuarioManager usuarioManager = new UsuarioManager();
+                //obtener el correo del usuario
                 string correo = Session["UsuarioCorreo"].ToString();
+                //verificar si el usuario es admin
                 if (!usuarioManager.EsUsuarioAdmin(correo))
                 {
+                    //si no es admin redirigir a la pantalla de cursos
                     Response.Redirect("CursoScreen.aspx");
                 }
                 else
                 {
+                    //si es admin cargar los cursos
                     if (!IsPostBack)
                     {
                         CargarCursos();
@@ -45,8 +49,10 @@ namespace Examen_05112024
 
         protected void btnAgregarCurso_Click(object sender, EventArgs e)
         {
+            // instanciar el manager
             var cursoManager = new CursoManager();
-            
+
+            // Crear un nuevo curso con los datos del formulario
             var nuevoCurso = new Cursos
             {
                 Titulo = txtTitulo.Text,
@@ -55,44 +61,54 @@ namespace Examen_05112024
                 Duracion = int.Parse(txtDuracion.Text)
             };
 
+            // Agregar el curso a la base de datos
             cursoManager.AgregarCurso(nuevoCurso);
+
+            // Vuelve a enlazar los datos al GridView
             CargarCursos();
         }
 
         protected void btnBuscarEmail_Click(object sender, EventArgs e)
         {
+            // instanciar el manager
             var usuarioManager = new UsuarioManager();
+            // Cargar los usuarios con el correo ingresado
             gvUsuariosAdmin.DataSource = usuarioManager.ObtenerUsuarioPorCorreo(txtCorreo.Text);
+            // Enlazar los datos al GridView
             gvUsuariosAdmin.DataBind();
 
         }
 
         protected void gvCursosAdmin_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            // Establece el índice de la fila editada
             gvCursosAdmin.EditIndex = e.NewEditIndex;
+            gvCursosAdmin.DataBind();
             CargarCursos();
         }
 
         protected void gvCursosAdmin_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
+            // Establece el GridView en modo de visualización
             gvCursosAdmin.EditIndex = -1;
+            // Vuelve a enlazar los datos al GridView
             CargarCursos();
         }
 
         protected void gvCursosAdmin_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            // Obtén el ID del curso
+            // Obtener el ID del curso
             int cursoID = Convert.ToInt32(gvCursosAdmin.DataKeys[e.RowIndex].Value);
 
-            // Obtén los nuevos valores de las celdas
 
+            // Obtener los nuevos valores de los campos de texto
             GridViewRow row = gvCursosAdmin.Rows[e.RowIndex];
             string nuevoTitulo = ((TextBox)row.Cells[1].Controls[0]).Text;
             string nuevaDescripcion = ((TextBox)row.Cells[2].Controls[0]).Text;
             string nuevaFecha = ((TextBox)row.Cells[3].Controls[0]).Text;
             string nuevaDuracion = ((TextBox)row.Cells[4].Controls[0]).Text;
 
-            // Actualiza los datos en la fuente de datos (por ejemplo, base de datos)
+            // Crear un nuevo objeto Curso con los nuevos valores
             var cursoActualizado = new Cursos
             {
                 Titulo = nuevoTitulo,
@@ -101,8 +117,10 @@ namespace Examen_05112024
                 Duracion = int.Parse(nuevaDuracion)
             };
 
-            // Aquí debes agregar el código para actualizar los datos en tu base de datos
+            // se instancia el manager
             var cursoManager = new CursoManager();
+
+            // se llama al metodo de editar curso
             cursoManager.EditarCurso(cursoActualizado, cursoID);
 
             // Establece el GridView en modo de visualización
@@ -120,9 +138,9 @@ namespace Examen_05112024
             // Obtén el ID del curso
             string cursoID = gvCursosAdmin.DataKeys[index].Value.ToString();
 
-            // Elimina el curso de la fuente de datos (por ejemplo, base de datos)
+            // instanciar el manager
             var cursoManager = new CursoManager();
-            // Aquí debes agregar el código para eliminar el curso en tu base de datos
+            // llamar al metodo de eliminar curso
             cursoManager.EliminarCurso(int.Parse(cursoID));
 
             // Vuelve a enlazar los datos al GridView

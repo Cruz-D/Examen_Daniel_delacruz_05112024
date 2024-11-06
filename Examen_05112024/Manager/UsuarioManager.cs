@@ -37,12 +37,15 @@ namespace Examen_05112024.Manager
 
         public List<Usuarios> ObtenerUsuarioPorCorreo(string correo)
         {
+            // se busca el usuario por el correo y se retorna una lista usando LINQ
             return _context.Usuarios.Where(c => c.Correo == correo).ToList();
         }
 
         public bool EsUsuarioAdmin(string correo)
         {
+            // se busca el usuario por el correo y se verifica si el rol es admin
             var usuario = _context.Usuarios.SingleOrDefault(u => u.Correo == correo);
+            // si el usuario no es nulo y el rol es admin se retorna true
             return usuario != null && usuario.Rol == "Admin";
         }
     }

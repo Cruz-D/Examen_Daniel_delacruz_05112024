@@ -18,6 +18,7 @@ namespace Examen_05112024.Manager
         // Constructor que inicializa el contexto
         public CursoManager()
         {
+
             _context = new DataClassesDataContext(cadenaConexion);
         }
 
@@ -36,6 +37,7 @@ namespace Examen_05112024.Manager
         // Añadir un curso
         public void AgregarCurso(Cursos curso)
         {
+            //agregar curso usando linQ
             _context.Cursos.InsertOnSubmit(curso);
             _context.SubmitChanges();
             ObtenerCursos();
@@ -44,6 +46,7 @@ namespace Examen_05112024.Manager
         // Editar un curso pasandole como parametro el curso a editar y el id
         public void EditarCurso(Cursos curso, int id)
         {
+            //obtener curso por id
             var cursoEditar = _context.Cursos.SingleOrDefault(c => c.CursoID == id);
             if (cursoEditar != null)
             {
@@ -51,6 +54,8 @@ namespace Examen_05112024.Manager
                 cursoEditar.Descripcion = curso.Descripcion;
                 cursoEditar.FechaInicio = curso.FechaInicio;
                 cursoEditar.Duracion = curso.Duracion;
+
+                //actualizar bbdd
                 _context.SubmitChanges();   
             }
         }

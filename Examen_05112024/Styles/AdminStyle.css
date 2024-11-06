@@ -1,26 +1,50 @@
-﻿.parent {
+﻿/* Estilos de CSS Grid para crear una cuadrícula responsiva */
+.parent {
     display: grid;
-    grid-template-rows: 1fr 2fr 1fr; /* Define el tamaño de las filas */
-    grid-template-columns: 1fr 3fr 1fr; /* Define el tamaño de las columnas */
-    height: 100vh; /* Ajusta la altura al 100% del viewport */
-    border: 2px solid black; /* Bordes externos */
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    padding: 1rem;
 }
 
-.div1 {
-    grid-column: span 2;
-    grid-row: span 2;
+.div1, .div3, .div4 {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
 }
 
-.div3 {
-    grid-column: span 2;
-    grid-row: span 3;
-    grid-column-start: 1;
-    grid-row-start: 3;
+/* Estilos para pantallas grandes */
+@media (min-width: 992px) {
+    .parent {
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: auto;
+    }
+
+    .div1 {
+        grid-column: 1 / 2;
+        grid-row: 1;
+    }
+
+    .div3 {
+        grid-column: 1 / 2;
+        grid-row: 2;
+    }
+
+    .div4 {
+        grid-column: 2 / 3;
+        grid-row: span 2;
+    }
 }
 
-.div4 {
-    grid-column: span 3;
-    grid-row: span 5;
-    grid-column-start: 3;
-    grid-row-start: 1;
+/* Estilos para pantallas medianas */
+@media (max-width: 991px) {
+    .parent {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .div1, .div3, .div4 {
+        grid-column: span 1;
+        grid-row: auto;
+    }
 }

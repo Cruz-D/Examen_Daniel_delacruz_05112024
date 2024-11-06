@@ -25,7 +25,7 @@ namespace Examen_05112024.Manager
         // agregar inscripcion
         public void AgregarInscripcion(int CursoID, int UserID)
         {
-
+            //agregar inscripcion usando linQ
             var inscripcion = new Inscripciones
             {
                 CursoID = CursoID,
@@ -33,7 +33,9 @@ namespace Examen_05112024.Manager
               
             };
 
+            //agregar inscripcion a la base de datos
             _context.Inscripciones.InsertOnSubmit(inscripcion);
+            //guardar cambios
             _context.SubmitChanges();
 
         }
